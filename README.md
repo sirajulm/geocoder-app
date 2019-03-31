@@ -14,9 +14,9 @@ It request the user for a friendly `title` for the place and the `address` of th
 Written in `ExpressJS`, exposes API's to create/edit, delete and query markers.
 Uses Firebase for storage. Geocoding API is written as a provider. It makes adding different, geocoding API easy and with no change to existing code. Developer can configure which provider to use, which then switches to the new provider.
 
-## Available Scripts
+## Available Scripts (Frontend)
 
-In the project directory, you can run:
+In the `client` directory, you can run:
 
 ### `npm start`
 
@@ -31,6 +31,13 @@ Launches the test runner in the interactive watch mode.<br>
 
 Builds the app for production to the `build` folder.<br>
 
+## Available Scripts (Backend)
+
+In the `server` directory, you can run:
+
+### `npm start`
+
+Runs the server in  `http://localhost:7000`, by default
 
 
 ## Issues
