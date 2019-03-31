@@ -1,13 +1,12 @@
 const request = require('request');
 const config = require('./config');
 
-// Provider should return response in valid format and throw error in other cases
-
 function geocode(address) {
-    // address should not be null or undefined
     return new Promise(function (resolve, reject) {
-        const URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${config.API_KEY}`;
+        const components = `country:${config.RESTRICT_COUNTRY}`;
+        const URL = `${config.GOOGLE_GEOCODE_JSON_API}?components=${components}&address=${address}&key=${config.API_KEY}`;
 
+        console.log(URL)
         request(URL, (error, response, body) => {
             if (error) {
                 reject(error);
@@ -25,7 +24,9 @@ function geocode(address) {
                     }
                     resolve(responseData)
                 } else {
-                    reject(new Error('Empty results'))
+                    const e = new Error('Empty results');
+                    e.name = "EmptyError";
+                    reject(e)
                 }
 
             }

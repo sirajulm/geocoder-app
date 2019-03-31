@@ -1,11 +1,10 @@
 import { takeLatest, takeEvery } from 'redux-saga/effects';
-import { fetchGeoCode } from './geoCodeSaga';
-import { fetchMarkers, deleteMarker } from './geoMarkerSaga';
+import { fetchMarkers, deleteMarker, addMarker } from './geoMarkerSaga';
 import * as types from '../constants/actionTypes';
 
 
-function* watchGeoCodes() {
-    yield takeLatest(types.FETCH_GEOCODE, fetchGeoCode);
+function* watchMarkerAdd() {
+    yield takeLatest(types.ADD_MARKER, addMarker);
 }
 
 function* watchMarkers() {
@@ -17,4 +16,4 @@ function* watchMarkerDelete() {
 }
 
 
-export { watchGeoCodes, watchMarkers, watchMarkerDelete }
+export { watchMarkerAdd, watchMarkers, watchMarkerDelete }

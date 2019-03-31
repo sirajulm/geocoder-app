@@ -1,32 +1,23 @@
 const express = require('express');
-const request = require('request');
 const bodyParser = require('body-parser');
 const admin = require('firebase-admin');
 const cors = require('cors');
-
-
-const PROVIDER = 'google';
+const appConfig = require('./config')
 var serviceAccount = require('./geocoderServiceAccount.json');
-
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
-
-var db = admin.firestore();
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const PORT = process.env.PORT | 7000;
-const HOST = process.env.HOST | "0.0.0.0";
-console.log("" + HOST)
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
+var db = admin.firestore();
+
 app.post('/geocode', async (req, res) => {
     const { body: { data: { id, title, address } } } = req;
-
     try {
-        const provider = require(`./providers/${PROVIDER}`);
+        const provider = require(`./providers/${appConfig.GEO_CODE_PROVIDER}`);
         let data = {};
 
         if (address) {
@@ -40,49 +31,66 @@ app.post('/geocode', async (req, res) => {
 
         if (id) {
             try {
-                const doc = await db.collection('map-markers').doc(id).get();
+                const doc = await db.collection(appConfig.DB_COLLECTION_NAME).doc(id).get();
                 if (!doc.exists) {
                     console.log('no doc');
                     // TODO
                 } else {
-                    // adding id to remove generatedID
                     data = { ...doc.data(), ...data, id };
                 }
             } catch (error) {
-                console.log(error);
+                throw error
             }
         } else {
 
         }
 
 
-        console.log(data)
-
         if (data.id) {
             var docRef = db.collection('map-markers').doc(data.id);
             await docRef.set(data);
-            res.send(data).status(200);
+            res.status(200).send(data);
         }
-    } catch (exception) {
-        console.log(exception)
+    } catch (error) {
+        if (error.name === 'EmptyError') {
+            res.status(404).send({
+                error: 'Address Not found'
+            })
+        } else if (error.code === 'MODULE_NOT_FOUND') {
+            res.status(500).send({
+                error: 'Internal Server Error'
+            })
+        } else {
+            res.status(500).send({
+                error: error.code
+            })
+        }
     }
 })
 
 app.get('/markers', async (req, res) => {
-    const snapshot = await db.collection('map-markers').get()
+    const snapshot = await db.collection(appConfig.DB_COLLECTION_NAME).get()
     const data = snapshot.docs.map(doc => doc.data());
-    const newData = {};
-    data.forEach((item) => {
-        newData[item.id] = item
-    })
-    res.send(newData).status(200);
+    if (data.length) {
+        const newData = {};
+        data.forEach((item) => {
+            newData[item.id] = item
+        })
+        res.send(newData).status(200);
+    } else {
+        res.status(404).send({ error: 'No data' })
+    }
 })
 
 app.delete('/markers/:id', async (req, res) => {
     const { params } = req;
-    var docRef = db.collection('map-markers').doc(params.id);
-    await docRef.delete();
-    res.send({ id: params.id }).status(200);
+    try {
+        var docRef = db.collection(appConfig.DB_COLLECTION_NAME).doc(params.id);
+        await docRef.delete();
+        res.send({ id: params.id }).status(200);
+    } catch (error) {
+        res.status(404).send({ error: 'Unable to delete. Try Again Later' })
+    }
 })
 
-app.listen(PORT, HOST, () => { console.log(`Server running in ${HOST}:${PORT}`) });
+app.listen(appConfig.PORT, appConfig.HOST, () => { console.log(`Server running in ${appConfig.HOST}:${appConfig.PORT}`) });

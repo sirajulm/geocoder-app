@@ -1,4 +1,7 @@
+
 export default {
-    geoMarkers: {},
-    geoAPIs: {},
+    geoMarkers: {
+        results: {},
+        error: ''
+    }
 }

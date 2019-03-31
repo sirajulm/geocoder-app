@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MarkerForm should render 1`] = `
+<div
+  className="sc-ifAKCX hFuvIb"
+>
+  <div
+    className="sc-EHOje bVEYVe"
+  >
+    Add/Edit Marker
+  </div>
+  <div
+    className="sc-bwzfXH ZRyws"
+  >
+    <label
+      className="sc-bdVaJa cFGRTz"
+      htmlFor="title"
+    >
+      Title
+       *
+    </label>
+    <input
+      className="sc-htpNat fDWxMd"
+      name="title"
+      onChange={[Function]}
+      placeholder="Enter Title"
+      required={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="sc-bwzfXH ZRyws"
+  >
+    <label
+      className="sc-bdVaJa cFGRTz"
+      htmlFor="address"
+    >
+      Address
+       *
+    </label>
+    <input
+      className="sc-htpNat fDWxMd"
+      name="address"
+      onChange={[Function]}
+      placeholder="Enter Address"
+      required={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <button
+    className="sc-bxivhb kEfJWi"
+    kind="primary"
+    onClick={[Function]}
+  >
+    Save
+  </button>
+</div>
+`;

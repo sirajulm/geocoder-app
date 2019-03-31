@@ -1,83 +1,76 @@
-import React, { Component, SyntheticEvent } from 'react';
+import React, { Component, SyntheticEvent, Fragment } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import { fetchGeoCode as fetchGeoCodeAction } from '../actions/geoCodeActions';
+import { addMarker as addMarkerAction } from '../actions/geoMarkers';
 import { fetchMarkers as fetchMarkersAction } from '../actions/geoMarkers';
-import MarkerDetail from '../components/MarkerDetail';
 import MapContainer from '../components/MapContainer';
-import MarkerList from '../components/MarkerList';
+
 import DetailsContainer from '../components/DetailsContainer';
-import MarkerForm from '../components/MarkerForm';
-import MarkerFormModal from '../components/MarkerFormModal';
-import Button from '../components/Button';
+
 
 
 export interface LandingProps {
-    // name: string;
     markers: any,
-    fetchGeoCode: (address: string) => void
+    error: string,
+    addMarker: (address: string) => void
     fetchMarkers: () => void
 }
-export interface LandingState {
-    modalOpen: boolean,
-}
+
 
 const StyledLanding = styled.div`
+    height: 100%;
+    max-width: 1600px;
+    margin: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
 `;
 
-class Landing extends Component<LandingProps, LandingState> {
-    constructor(props: LandingProps) {
-        super(props);
-        this.state = {
-            modalOpen: false
-        }
-    }
+
+
+class Landing extends Component<LandingProps> {
     componentDidMount() {
         const { fetchMarkers } = this.props;
         fetchMarkers();
+        toast.info('Fetching Data', {
+            position: toast.POSITION.TOP_CENTER
+        });
     }
-    toggleModal = () => {
-        const { modalOpen } = this.state;
-        this.setState({ modalOpen: !modalOpen });
-    }
-    onSubmit = (data: any) => {
-        const { fetchGeoCode } = this.props;
-        fetchGeoCode(data);
-        this.toggleModal();
-    }
+
     render() {
-        const { modalOpen } = this.state;
-        const { fetchGeoCode } = this.props;
+        const { addMarker, error } = this.props;
 
-        return <StyledLanding>
-            <MapContainer markers={this.props.markers} />
-            <DetailsContainer>
-                <Button label="Add Map" kind="primary" onClick={(event) => { this.toggleModal() }} />
-                <MarkerFormModal
-                    isOpen={modalOpen}
-                    title=""
-                    address=""
-                    onSubmit={this.onSubmit}
-                    onClose={this.toggleModal}
-                ></MarkerFormModal>
-                <MarkerList onSubmit={fetchGeoCode} items={this.props.markers} />
-            </DetailsContainer>
+        if (error) {
+            toast.error(error, {
+                position: toast.POSITION.TOP_CENTER
+            });
+        }
+        return <Fragment>
+            <ToastContainer />
+            <StyledLanding>
+                <MapContainer markers={this.props.markers} />
+                <DetailsContainer
+                    onSubmit={addMarker}
+                    markers={this.props.markers}
+                >
+                </DetailsContainer>
 
-        </StyledLanding >
+            </StyledLanding >
+        </Fragment>
     }
 }
 
 const mapStateToProps = (state: any) => {
     return {
-        markers: state.geoMarker || {}
+        markers: state.geoMarker.results || {},
+        error: state.geoMarker.error
     }
 }
 
 const mapDispatchToProps = (dispatch: Function, ownProps: any) => ({
-    fetchGeoCode: (data: any) => dispatch(fetchGeoCodeAction(data)),
+    addMarker: (data: any) => dispatch(addMarkerAction(data)),
     fetchMarkers: () => dispatch(fetchMarkersAction())
 })
 

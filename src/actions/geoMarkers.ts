@@ -20,6 +20,27 @@ export const fetMarkersError = (error: any) => {
     }
 }
 
+export const addMarker = (payload: any) => {
+    return {
+        type: types.ADD_MARKER,
+        payload
+    }
+};
+
+export const addMarkerSuccess = (payload: any) => {
+    return {
+        type: types.ADD_MARKER_SUCCESS,
+        payload
+    }
+};
+
+export const addMarkerError = (error: any) => {
+    return {
+        type: types.ADD_MARKER_ERROR,
+        error
+    }
+};
+
 export const deleteMarker = (id: string) => {
     return {
         type: types.DELETE_MARKER,

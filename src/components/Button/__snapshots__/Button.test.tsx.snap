@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render 1`] = `
+.c0 {
+  background-color: #ffffff;
+  border: 1px solid #dadada;
+  color: #000000;
+  width: 100px;
+  height: 40px;
+  margin: 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 0 15px;
+  outline: none;
+}
+
+<button
+  className="c0"
+/>
+`;
+
+exports[`Button should render primary 1`] = `
+.c0 {
+  background-color: #165fa4;
+  border: 0;
+  color: #ffffff;
+  width: 100px;
+  height: 40px;
+  margin: 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 0 15px;
+  outline: none;
+}
+
+<button
+  className="c0"
+  kind="primary"
+/>
+`;
+
+exports[`Button should render secondary 1`] = `
+.c0 {
+  background-color: #ffffff;
+  border: 1px solid #dadada;
+  color: #000000;
+  width: 100px;
+  height: 40px;
+  margin: 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 0 15px;
+  outline: none;
+}
+
+<button
+  className="c0"
+  kind="secondary"
+/>
+`;

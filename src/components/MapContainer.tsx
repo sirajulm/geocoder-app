@@ -3,44 +3,55 @@ import styled from 'styled-components';
 import GoogleMapReact from 'google-map-react';
 import _ from 'lodash';
 import markerImage from '../images/marker.png'
+import { GOOGLE_MAP_KEY, MAP_DEFAULT_CENTER, MAP_DEFAULT_ZOOM } from '../config'
 
 export interface MapContainerProps {
     markers: any;
 }
 
-const AnyReactComponent = ({ text }: any) => (
-    <div>
-        <img
-            src={markerImage}
-            style={{ width: '25px' }}
-            alt="google marker"
-        />
-    </div>
-);
-
+interface MarkerProps {
+    lat: number,
+    lng: number
+}
 
 const StyledDiv = styled.div`
     position:relative;
-
-    height:500px;
+    height:50%;
+    min-height: 500px;
 `;
+
+const StyledMarkerWrapper = styled.div<MarkerProps>``;
+
+const StyledMarkerImage = styled.img`
+    width: 25px;
+    position: absolute;
+    bottom: 0;
+    left: -12.5px;
+`;
+
+
 const MapContainer = (props: MapContainerProps) => {
     return <StyledDiv>
         <GoogleMapReact
-            bootstrapURLKeys={{ key: 'AIzaSyDAGl-X7AwUOEu-F_EiXlaKzJaGP_6axRk' }}
-            defaultCenter={{ lat: 52.52000659999999, lng: 13.404954 }}
-            defaultZoom={7}
+            bootstrapURLKeys={{ key: GOOGLE_MAP_KEY }}
+            defaultCenter={MAP_DEFAULT_CENTER}
+            defaultZoom={MAP_DEFAULT_ZOOM}
         >
             {
 
                 _.map(props.markers, (marker) => {
                     return (
-                        <AnyReactComponent
+                        <StyledMarkerWrapper
                             key={marker.id}
                             lat={marker.geometry.lat}
                             lng={marker.geometry.lng}
-                            text="marker.address"
-                        />
+                        >
+                            <StyledMarkerImage
+                                src={markerImage}
+                                style={{ width: '25px' }}
+                                alt="google marker"
+                            />
+                        </StyledMarkerWrapper>
                     )
                 })}
 

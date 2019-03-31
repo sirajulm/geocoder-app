@@ -1,5 +1,4 @@
-import React, { SyntheticEvent, ReactNode, Component } from 'react';
-import Button from './Button'
+import React, { SyntheticEvent, ReactNode, Component, Fragment } from 'react';
 import styled from 'styled-components';
 import _ from 'lodash';
 import MarkerDetail from './MarkerDetail';
@@ -21,11 +20,14 @@ interface MarkerState {
 
 }
 const StyledMarkerList = styled.div`
+    height: calc(100% - 80px);
+    overflow: scroll;
     display: grid;
     grid-template-columns: 1fr 1fr;
     row-gap: 15px;
     column-gap: 15px;
     padding: 15px;
+    overflow: scroll;
 `;
 
 
@@ -70,7 +72,7 @@ class MarkerList extends Component<MarkerListProps, MarkerState> {
     render() {
         const { modalOpen, id, title, address } = this.state
         return (
-            <div>
+            <Fragment>
                 <StyledMarkerList>
                     {_.map(this.props.items, (item) => {
                         return <MarkerDetail
@@ -89,7 +91,7 @@ class MarkerList extends Component<MarkerListProps, MarkerState> {
                     title={title}
                     address={address}
                     onSubmit={this.onSubmit} onClose={this.toggleModal}></MarkerFormModal>
-            </div>
+            </Fragment>
         );
     }
 }

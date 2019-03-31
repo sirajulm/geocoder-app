@@ -1,42 +1,42 @@
 import axios from 'axios';
 import { async } from 'q';
+import { BASE_URL } from '../config'
 
-const BASE_URL = 'http://localhost:7000';
-const GEOCODE_FETCH_API = `${BASE_URL}/geocode`;
 
 const fetchGeoCodeAPI = async (payload: any) => {
+    const GEOCODE_FETCH_API = `${BASE_URL}/geocode`;
     try {
         const data = await axios.post(GEOCODE_FETCH_API, {
             data: payload
         });
         return data;
 
-    } catch (exception) {
-        console.log(exception);
+    } catch (error) {
+        throw error;
     }
 }
 
-const GEOMARKER_FETCH_API = `${BASE_URL}/markers`
 const fetchMarkersAPI = async () => {
+    const GEOMARKER_FETCH_API = `${BASE_URL}/markers`
     try {
         const data = await axios.get(GEOMARKER_FETCH_API);
         return data;
 
-    } catch (exception) {
-        console.log(exception);
+    } catch (error) {
+        throw error;
     }
 }
 
-const deleteMMarkerAPI = async (id: string) => {
+const deleteMarkerAPI = async (id: string) => {
     const GEOMARKER_DELETE_API = `${BASE_URL}/markers/${id}`
     try {
         const data = await axios.delete(GEOMARKER_DELETE_API);
         return data;
 
-    } catch (exception) {
-        console.log(exception);
+    } catch (error) {
+        throw error;
     }
 }
 
 
-export { fetchGeoCodeAPI, fetchMarkersAPI, deleteMMarkerAPI };
+export { fetchGeoCodeAPI, fetchMarkersAPI, deleteMarkerAPI };
