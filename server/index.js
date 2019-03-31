@@ -47,7 +47,7 @@ app.post('/markers', async (req, res) => {
 
 
         if (data.id) {
-            var docRef = db.collection('map-markers').doc(data.id);
+            var docRef = db.collection(appConfig.DB_COLLECTION_NAME).doc(data.id);
             await docRef.set(data);
             res.status(200).send(data);
         }
@@ -77,7 +77,7 @@ app.get('/markers', async (req, res) => {
         data.forEach((item) => {
             newData[item.id] = item
         })
-        res.send(newData).status(200);
+        res.status(200).send(newData);
     } else {
         res.status(404).send({ error: 'No data' })
     }
@@ -88,7 +88,7 @@ app.delete('/markers/:id', async (req, res) => {
     try {
         var docRef = db.collection(appConfig.DB_COLLECTION_NAME).doc(params.id);
         await docRef.delete();
-        res.send({ id: params.id }).status(200);
+        res.status(200).send({ id: params.id });
     } catch (error) {
         res.status(404).send({ error: 'Unable to delete. Try Again Later' })
     }

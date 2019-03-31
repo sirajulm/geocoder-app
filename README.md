@@ -40,6 +40,42 @@ In the `server` directory, you can run:
 Runs the server in  `http://localhost:7000`, by default
 
 
+## Developer Decisions
+
+
+### Third Party Integration
+
+Server is developed in such that, adding a new provider is seamless, developer only need to ensure, whichever the provider is it returns a consistent response. The server logic, along with configuration ensure proper provider will be picked up. This can help in reducing changes required to integrate new providers remove existing ones.
+Any thirdparty integration failure will be handled gracefully.
+
+### Combine Create/Edit
+
+The Redux Action `ADD_MARKER` does the job for create and edit as well. The form is simple and making different actions would just repeat the code. The form intelligently, finds and submits only the updated fields to the backend, so as to make backend as dumb as possible.
+
+### Marker Addition from Map
+
+Marker addition directly from the map, is ignored, since it directly gets the lat/lng, which would not help in demonstrating the demo. Also that would require, reverse geocoding to get the details, and adding label to the location would also turn to be little indirect.
+
+
+### Responsive Layout and styling
+
+Only few components are converted to responsive layout, to demonstrate the usage of `@media` queries. Styling have been majorly handled using `styled-components`, which compared to other `css-in-js` libraries provide much cleaner and proper CSS way of doing things
+
+### Fonts and Colors
+
+Font used is `Open Sans` which looks neet and similar to the design. Colors are similar colors matching the design. Any design layout and sizes are chosen to make a similar layout, and also to ensure a better look and feel.
+
+### Limit search to Germany
+
+The search has been limited to Germany (DE), to verify for invalid addresses. Which can be configured in the backed.
+
+### Configuration
+
+Most values for frontend and backend are made cofigurable, especially the API keys and baseURL's and other configurable constants.
+Changing a few values like `defaultCenter` for the Map would break the application, rest fails gracefully.
+
+
+
 ## Issues
 
 Below are the list of issues existing in the app
