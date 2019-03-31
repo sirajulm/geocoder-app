@@ -20,6 +20,7 @@ const StyledSpinnerWrapper = styled.div`
     margin-top: -50px;
 `;
 const StyledSpinner = styled.img`
+    width: 100%;
 `;
 const Loader = () => {
     return <StyledOverlay>
