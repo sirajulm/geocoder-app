@@ -64,7 +64,6 @@ class MarkerList extends Component<MarkerListProps, MarkerState> {
     }
 
     editMarker = (data: any) => {
-        console.log(data);
         this.setState({
             modalOpen: true,
             id: data.id,

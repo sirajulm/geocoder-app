@@ -1,5 +1,19 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Introduction
+
+Demo project to demonstrate implementation of adding markers on a map
+
+### Frontend
+
+Written in `React/Redux/Saga` enables a user to add, edit or delete any number of markers on the map.
+It request the user for a friendly `title` for the place and the `address` of the place and send it to the backend to retrieve the geocode and add it to the map.
+
+### Backend
+
+Written in `ExpressJS`, exposes API's to create/edit, delete and query markers.
+Uses Firebase for storage. Geocoding API is written as a provider. It makes adding different, geocoding API easy and with no change to existing code. Developer can configure which provider to use, which then switches to the new provider.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -9,36 +23,38 @@ In the project directory, you can run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Issues
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Below are the list of issues existing in the app
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Marker ID generation (Backend)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Currently, the backend is using the `place_id`, for convinence, returned by the geocoder API to persist the marker to DB. Which is not appropriate for a real world project. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Overlapping Markers (Backend)
 
-## Learn More
+Due to the above issue, if a  place `A` is added and stored with `place_id` value `place_a`, later the address is modified to `B` with `place_id` `place_b`, since it is an update the lat/long values are saved directly against `place_a`. This mismatch can be avoided with an id generator.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+With the above scenario, there is a minor issue, where adding place `A`, and updating it to `B`, and then adding a new place `B` will have 2 markers getting overlapped.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Delete confirmation (Frontend)
+
+Not implemented
+
+### Unit Test
+
+Not written for some components and redux
+
+### Integration Test
+
+Not Written

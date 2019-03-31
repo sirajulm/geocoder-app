@@ -13,7 +13,6 @@ export function* fetchMarkers() {
 
     try {
         const { data } = yield call(fetchMarkersAPI);
-        console.log('ddddd', data);
         yield put(fetchMarkersSucess(data))
     } catch (error) {
         yield put(fetchMarkersError(error));
