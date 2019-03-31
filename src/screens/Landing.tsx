@@ -26,7 +26,11 @@ const StyledLanding = styled.div`
     max-width: 1600px;
     margin: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    @media(min-width: 780px) {
+        grid-template-rows: unset;
+        grid-template-columns: 1fr 1fr;
+    }
 `;
 
 
