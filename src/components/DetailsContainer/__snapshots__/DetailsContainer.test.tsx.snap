@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DetailsContainer should render 1`] = `
+<div
+  className="sc-VigVT cseIOd"
+>
+  <button
+    className="sc-bxivhb kEfJWi"
+    kind="primary"
+    onClick={[Function]}
+  >
+    Add Map
+  </button>
+  <div
+    className="sc-jTzLTM dDcTlX"
+  />
+  <div
+    className="sc-gqjmRU dHQqgc"
+  />
+</div>
+`;

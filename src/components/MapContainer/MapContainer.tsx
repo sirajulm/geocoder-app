@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import GoogleMapReact from 'google-map-react';
 import _ from 'lodash';
-import markerImage from '../images/marker.png'
-import { GOOGLE_MAP_KEY, MAP_DEFAULT_CENTER, MAP_DEFAULT_ZOOM } from '../config'
+import markerImage from '../../images/marker.png'
+import { GOOGLE_MAP_KEY, MAP_DEFAULT_CENTER, MAP_DEFAULT_ZOOM } from '../../config'
 
 export interface MapContainerProps {
     markers: any;

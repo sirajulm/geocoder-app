@@ -1,8 +1,8 @@
 import React, { SyntheticEvent } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux'
-import Button from './Button'
-import { deleteMarker as deleteMarkerAction } from '../actions/geoMarkers'
+import Button from '../Button'
+import { deleteMarker as deleteMarkerAction } from '../../actions/geoMarkers'
 
 interface MarkerDetailProps {
     id: string;

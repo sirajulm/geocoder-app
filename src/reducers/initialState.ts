@@ -2,6 +2,7 @@
 export default {
     geoMarkers: {
         results: {},
-        error: ''
+        error: '',
+        apiCallInProgress: false
     }
 }

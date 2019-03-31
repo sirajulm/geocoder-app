@@ -1,8 +1,8 @@
 import React, { SyntheticEvent, ReactNode, Component } from 'react';
 import styled from 'styled-components';
-import MarkerFormModal from '../components/MarkerFormModal';
-import MarkerList from '../components/MarkerList';
-import Button from '../components/Button';
+import MarkerFormModal from '../MarkerFormModal';
+import MarkerList from '../MarkerList';
+import Button from '../Button';
 
 const StyledDetailContainer = styled.div`
     margin:15px;

@@ -1,8 +1,8 @@
 import React, { SyntheticEvent, ReactNode, Component, Fragment } from 'react';
 import styled from 'styled-components';
 import _ from 'lodash';
-import MarkerDetail from './MarkerDetail';
-import MarkerFormModal from './MarkerFormModal';
+import MarkerDetail from '../MarkerDetail';
+import MarkerFormModal from '../MarkerFormModal';
 
 
 interface MarkerListProps {

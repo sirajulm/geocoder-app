@@ -7,14 +7,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import { addMarker as addMarkerAction } from '../actions/geoMarkers';
 import { fetchMarkers as fetchMarkersAction } from '../actions/geoMarkers';
 import MapContainer from '../components/MapContainer';
-
 import DetailsContainer from '../components/DetailsContainer';
+import Loader from '../components/Loader';
 
 
 
 export interface LandingProps {
     markers: any,
     error: string,
+    apiCallInProgress: boolean;
     addMarker: (address: string) => void
     fetchMarkers: () => void
 }
@@ -40,7 +41,7 @@ class Landing extends Component<LandingProps> {
     }
 
     render() {
-        const { addMarker, error } = this.props;
+        const { addMarker, error, apiCallInProgress } = this.props;
 
         if (error) {
             toast.error(error, {
@@ -48,6 +49,7 @@ class Landing extends Component<LandingProps> {
             });
         }
         return <Fragment>
+            {apiCallInProgress && <Loader />}
             <ToastContainer />
             <StyledLanding>
                 <MapContainer markers={this.props.markers} />
@@ -65,7 +67,8 @@ class Landing extends Component<LandingProps> {
 const mapStateToProps = (state: any) => {
     return {
         markers: state.geoMarker.results || {},
-        error: state.geoMarker.error
+        error: state.geoMarker.error,
+        apiCallInProgress: state.geoMarker.apiCallInProgress
     }
 }
 

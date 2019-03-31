@@ -1,8 +1,8 @@
 import React, { SyntheticEvent } from 'react';
 import Modal from 'react-modal';
-import MarkerForm from './MarkerForm';
-import CloseIcon from '../images/close.svg'
 import styled from 'styled-components';
+import MarkerForm from '../MarkerForm';
+import CloseIcon from '../../images/close.svg'
 
 interface MarkerFormModalProps {
     isOpen: boolean,

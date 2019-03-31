@@ -7,7 +7,11 @@ export default function (state = initialState.geoMarkers, action: any) {
     switch (action.type) {
 
         case types.FETCH_MARKERS: {
-            const newState = { ...state, error: '' };
+            const newState = {
+                ...state,
+                error: '',
+                apiCallInProgress: true
+            };
             return newState;
         }
 
@@ -15,7 +19,8 @@ export default function (state = initialState.geoMarkers, action: any) {
             const newState = {
                 ...initialState.geoMarkers,
                 results: { ...action.payload },
-                error: ''
+                error: '',
+                apiCallInProgress: false
             }
             return newState
         }
@@ -27,12 +32,20 @@ export default function (state = initialState.geoMarkers, action: any) {
                 _.get(action.error, 'message', undefined) ||
                 'Server Error';
 
-            const newState = { ...state, error: errorMessage };
+            const newState = {
+                ...state,
+                error: errorMessage,
+                apiCallInProgress: false
+            };
             return newState;
         }
 
         case types.ADD_MARKER: {
-            const newState = { ...state, error: '' };
+            const newState = {
+                ...state,
+                error: '',
+                apiCallInProgress: true
+            };
             return newState;
         }
 
@@ -40,7 +53,8 @@ export default function (state = initialState.geoMarkers, action: any) {
             const newState = {
                 ...state,
                 results: { ...state.results, ...{ [action.payload.id]: { ...action.payload } } },
-                error: ''
+                error: '',
+                apiCallInProgress: false
             }
             return newState;
         }
@@ -52,13 +66,21 @@ export default function (state = initialState.geoMarkers, action: any) {
                 _.get(action.error, 'message', undefined) ||
                 'Server Error';
 
-            const newState = { ...state, error: errorMessage };
+            const newState = {
+                ...state,
+                error: errorMessage,
+                apiCallInProgress: false
+            };
             return newState;
         }
 
         case types.DELETE_MARKER: {
             const id: string = action.id;
-            const newState = { ...state, error: '' }
+            const newState = {
+                ...state,
+                error: '',
+                apiCallInProgress: true
+            }
             return newState;
         }
 
@@ -67,7 +89,8 @@ export default function (state = initialState.geoMarkers, action: any) {
             const newState = {
                 ...state,
                 results: _.omit(state.results, [id]),
-                error: ''
+                error: '',
+                apiCallInProgress: false
             }
             return newState;
         }
@@ -78,7 +101,11 @@ export default function (state = initialState.geoMarkers, action: any) {
                 _.get(action.error, 'message', undefined) ||
                 'Server Error';
 
-            const newState = { ...state, error: errorMessage };
+            const newState = {
+                ...state,
+                error: errorMessage,
+                apiCallInProgress: false
+            };
             return newState;
         }
 
