@@ -1,8 +1,8 @@
 import { put, call } from 'redux-saga/effects';
-import { fetchMarkersAPI, deleteMarkerAPI, fetchGeoCodeAPI } from '../api/geocode';
+import { fetchMarkersAPI, deleteMarkerAPI, addMarkerAPI } from '../api/geocode';
 import {
-    fetMarkersSucess,
-    fetMarkersError,
+    fetchMarkersSucess,
+    fetchMarkersError,
     addMarkerSuccess,
     addMarkerError,
     deleteMarkerSuccess,
@@ -14,9 +14,9 @@ export function* fetchMarkers() {
     try {
         const { data } = yield call(fetchMarkersAPI);
         console.log('ddddd', data);
-        yield put(fetMarkersSucess(data))
+        yield put(fetchMarkersSucess(data))
     } catch (error) {
-        yield put(fetMarkersError(error));
+        yield put(fetchMarkersError(error));
     }
 
 }
@@ -33,7 +33,7 @@ export function* deleteMarker(action: any) {
 
 export function* addMarker({ payload }: any) {
     try {
-        const { data } = yield call(fetchGeoCodeAPI, payload);
+        const { data } = yield call(addMarkerAPI, payload);
         yield put(addMarkerSuccess(data))
     } catch (error) {
         yield put(addMarkerError(error));

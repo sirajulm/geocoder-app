@@ -1,6 +1,9 @@
 import React, { SyntheticEvent } from 'react'
 import styled from 'styled-components';
 
+/**
+ * Button can be of 2 kind primary and secondary with styling changes
+ */
 interface ButtonProps {
     onClick: (event: SyntheticEvent) => void;
     kind: 'primary' | 'secondary'

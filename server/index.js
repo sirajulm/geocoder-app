@@ -14,7 +14,7 @@ admin.initializeApp({
 });
 var db = admin.firestore();
 
-app.post('/geocode', async (req, res) => {
+app.post('/markers', async (req, res) => {
     const { body: { data: { id, title, address } } } = req;
     try {
         const provider = require(`./providers/${appConfig.GEO_CODE_PROVIDER}`);

@@ -60,7 +60,6 @@ export default function (state = initialState.geoMarkers, action: any) {
         }
 
         case types.ADD_MARKER_ERROR: {
-            console.log(action)
             const errorMessage =
                 _.get(action.error, 'response.data.error', undefined) ||
                 _.get(action.error, 'message', undefined) ||

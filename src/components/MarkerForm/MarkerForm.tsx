@@ -22,7 +22,11 @@ const StyledError = styled.div`
     margin-left: 15px;
 `;
 
-
+/**
+ * Takes two object and returns the keys for which values have changed
+ * @param o1 object
+ * @param o2 object
+ */
 function changedKeys(o1: any, o2: any) {
     const keys = _.union(_.keys(o1), _.keys(o2));
     return _.filter(keys, (key) => {

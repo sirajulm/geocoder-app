@@ -38,7 +38,6 @@ const MapContainer = (props: MapContainerProps) => {
             defaultZoom={MAP_DEFAULT_ZOOM}
         >
             {
-
                 _.map(props.markers, (marker) => {
                     return (
                         <StyledMarkerWrapper

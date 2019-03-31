@@ -1,4 +1,4 @@
-import React, { Component, SyntheticEvent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';

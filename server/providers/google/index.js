@@ -6,7 +6,6 @@ function geocode(address) {
         const components = `country:${config.RESTRICT_COUNTRY}`;
         const URL = `${config.GOOGLE_GEOCODE_JSON_API}?components=${components}&address=${address}&key=${config.API_KEY}`;
 
-        console.log(URL)
         request(URL, (error, response, body) => {
             if (error) {
                 reject(error);

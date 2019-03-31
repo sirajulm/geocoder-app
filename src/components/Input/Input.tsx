@@ -2,6 +2,8 @@ import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 
+/* Returns a controlled Input component with label, if provided */
+
 interface InputProps {
     name: string;
     label?: string;
