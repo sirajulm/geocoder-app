@@ -57,6 +57,7 @@ app.post('/markers', async (req, res) => {
                 error: 'Address Not found'
             })
         } else if (error.code === 'MODULE_NOT_FOUND') {
+            console.log(error);
             res.status(500).send({
                 error: 'Internal Server Error'
             })
