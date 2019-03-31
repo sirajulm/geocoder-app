@@ -6,13 +6,13 @@ import MarkerFormModal from '../MarkerFormModal';
 
 
 interface MarkerListProps {
-    // children: ReactNode,
+
     items: any;
     onSubmit: (data: any) => void
 }
 
 interface MarkerState {
-    // children: ReactNode,
+
     modalOpen: boolean;
     id: string;
     title: string;
@@ -28,6 +28,10 @@ const StyledMarkerList = styled.div`
     column-gap: 15px;
     padding: 15px;
     overflow: scroll;
+    @media (max-width: 1500px) {
+        grid-template-columns: unset;
+        grid-template-rows: 1fr 1fr;
+    }
 `;
 
 

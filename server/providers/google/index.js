@@ -4,7 +4,7 @@ const config = require('./config');
 function geocode(address) {
     return new Promise(function (resolve, reject) {
         const components = `country:${config.RESTRICT_COUNTRY}`;
-        const URL = `${config.GOOGLE_GEOCODE_JSON_API}?address=${address}&key=${config.API_KEY}`;
+        const URL = `${config.GOOGLE_GEOCODE_JSON_API}?components=${components}&address=${address}&key=${config.API_KEY}`;
 
         console.log(URL)
         request(URL, (error, response, body) => {

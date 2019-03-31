@@ -27,9 +27,10 @@ const StyledLanding = styled.div`
     margin: auto;
     display: grid;
     grid-template-rows: 1fr 1fr;
+    grid-template-columns: unset;
     @media(min-width: 780px) {
-        grid-template-rows: unset;
         grid-template-columns: 1fr 1fr;
+        grid-template-rows: unset;
     }
 `;
 
