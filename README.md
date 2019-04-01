@@ -74,6 +74,7 @@ The search has been limited to Germany (DE), to verify for invalid addresses. Wh
 Most values for frontend and backend are made cofigurable, especially the API keys and baseURL's and other configurable constants.
 Changing a few values like `defaultCenter` for the Map would break the application, rest fails gracefully.
 
+**Note**: Some critial configurations like API keys and `serviceAccount.json` have been committed to the project for easy access and demonstration. These should not be directly committed in a real world project, which could be compromised. These should be only delivered via environment configuration or on deployment steps. This would be revoked once the demonstration is complete.
 
 
 ## Issues
