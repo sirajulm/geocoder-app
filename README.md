@@ -98,10 +98,6 @@ With the above scenario, there is a minor issue, where adding place `A`, and upd
 
 Not implemented
 
-### Unit Test
+### Unit Test & Integration Test
 
 Not written for some components and redux
-
-### Integration Test
-
-Not Written
