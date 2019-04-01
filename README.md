@@ -48,6 +48,9 @@ Runs the server in  `http://localhost:7000`, by default
 Server is developed in such that, adding a new provider is seamless, developer only need to ensure, whichever the provider is it returns a consistent response. The server logic, along with configuration ensure proper provider will be picked up. This can help in reducing changes required to integrate new providers remove existing ones.
 Any thirdparty integration failure will be handled gracefully.
 
+### Authentication
+For the simplicity of the project, athentication and user level storage of markers, is skipped. Currently all the markers are public.
+
 ### Combine Create/Edit
 
 The Redux Action `ADD_MARKER` does the job for create and edit as well. The form is simple and making different actions would just repeat the code. The form intelligently, finds and submits only the updated fields to the backend, so as to make backend as dumb as possible.
